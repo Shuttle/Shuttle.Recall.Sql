@@ -6,7 +6,7 @@ namespace Shuttle.Recall.Sql
 {
     public class DatabaseContextObserver :
         IPipelineObserver<OnAfterStartTransactionScope>,
-        IPipelineObserver<OnAfterGetEvent>,
+        IPipelineObserver<OnGetProjectionPrimitiveEvent>,
         IPipelineObserver<OnAfterAcknowledgeEvent>,
         IPipelineObserver<OnAbortPipeline>
     {
@@ -66,7 +66,7 @@ namespace Shuttle.Recall.Sql
             }
         }
 
-        public void Execute(OnAfterGetEvent pipelineEvent1)
+        public void Execute(OnGetProjectionPrimitiveEvent pipelineEvent)
         {
             if (_projectionConfiguration.SharedConnection)
             {

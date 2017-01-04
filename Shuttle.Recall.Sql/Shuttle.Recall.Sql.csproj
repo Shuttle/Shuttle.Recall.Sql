@@ -65,13 +65,14 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.4.2.52\lib\net40-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=4.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.4.0.4\lib\net40-full\Shuttle.Recall.dll</HintPath>
+    <Reference Include="Shuttle.Recall, Version=4.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.4.0.6\lib\net40-full\Shuttle.Recall.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,9 +84,8 @@
     <Compile Include="Configuration\IProjectionConfiguration.cs" />
     <Compile Include="Configuration\ProjectionConfiguration.cs" />
     <Compile Include="Configuration\ProjectionSection.cs" />
+    <Compile Include="DataAccess\EventProjectionRepository.cs" />
     <Compile Include="DataAccess\EventStoreColumns.cs" />
-    <Compile Include="DataAccess\EventStoreQueryFactory.cs" />
-    <Compile Include="DataAccess\IEventStoreQueryFactory.cs" />
     <Compile Include="DataAccess\IKeyStoreQueryFactory.cs" />
     <Compile Include="DataAccess\IPrimitiveEventQueryFactory.cs" />
     <Compile Include="DataAccess\IProjectionQueryFactory.cs" />
@@ -95,11 +95,9 @@
     <Compile Include="DataAccess\PrimitiveEventRepository.cs" />
     <Compile Include="DataAccess\ProjectionPositionColumns.cs" />
     <Compile Include="DataAccess\ProjectionQueryFactory.cs" />
-    <Compile Include="DataAccess\SnapshotStoreColumns.cs" />
+    <Compile Include="DatabaseContextModule.cs" />
     <Compile Include="DatabaseContextObserver.cs" />
-    <Compile Include="EventStore.cs" />
     <Compile Include="KeyStore.cs" />
-    <Compile Include="ProjectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlResources.Designer.cs">
       <AutoGen>True</AutoGen>

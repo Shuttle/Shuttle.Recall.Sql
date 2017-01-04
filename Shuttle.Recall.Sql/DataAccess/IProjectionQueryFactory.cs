@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Shuttle.Core.Data;
+﻿using Shuttle.Core.Data;
 
 namespace Shuttle.Recall.Sql
 {
@@ -8,7 +6,5 @@ namespace Shuttle.Recall.Sql
 	{
 		IQuery GetSequenceNumber(string name);
 		IQuery SetSequenceNumber(string name, long sequenceNumber);
-		IQuery Get(long sequenceNumber, int limit);
-		IQuery Get(long sequenceNumber, int limit, IEnumerable<Type> eventTypes);
 	}
 }

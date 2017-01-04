@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
@@ -33,7 +34,14 @@ namespace Shuttle.Recall.Sql
 
         public IQuery GetProjectionEvents(long fromSequenceNumber, IEnumerable<Type> eventTypes, int limit)
         {
-            return new RawQuery(_scriptProvider.Get("GetProjectionEvents")).AddParameterValue(EventStoreColumns.Id, id);
+            return
+                new RawQuery(string.Format(_scriptProvider.Get("GetProjectionEvents"), limit,
+                    eventTypes == null
+                        ? string.Empty
+                        : string.Format("and EventType in ({0})",
+                            string.Join(",",
+                                eventTypes.Select(eventType => string.Concat("'", eventType, "'")).ToArray()))))
+                    .AddParameterValue(EventStoreColumns.SequenceNumber, fromSequenceNumber);
         }
     }
 }
