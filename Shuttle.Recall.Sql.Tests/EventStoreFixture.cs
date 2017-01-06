@@ -1,16 +1,14 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Castle.Windsor;
 using NUnit.Framework;
 using Shuttle.Core.Castle;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
-using Shuttle.Recall;
 using Shuttle.Recall.Tests;
 
 namespace Shuttle.Recall.Sql.Tests
 {
-    public class SqlEventStoreFixture : EventStoreFixture
+    public class EventStoreFixture : Fixture
     {
         [Test]
         public void ExerciseEventStore()
@@ -19,8 +17,8 @@ namespace Shuttle.Recall.Sql.Tests
 
             container.Register<IScriptProvider>(new ScriptProvider(new ScriptProviderConfiguration
             {
-                ResourceAssembly = Assembly.GetAssembly(typeof(PrimitiveEventRepository)),
-                ResourceNameFormat = ""
+                ResourceAssembly = Assembly.GetAssembly(typeof (PrimitiveEventRepository)),
+                ResourceNameFormat = SqlResources.ResourceNameFormat
             }));
 
             container.Register<IDatabaseContextCache, ThreadStaticDatabaseContextCache>();
@@ -28,12 +26,16 @@ namespace Shuttle.Recall.Sql.Tests
             container.Register<IDbConnectionFactory, DbConnectionFactory>();
             container.Register<IDbCommandFactory, DbCommandFactory>();
             container.Register<IDatabaseGateway, DatabaseGateway>();
+            container.Register<IQueryMapper, QueryMapper>();
             container.Register<IPrimitiveEventRepository, PrimitiveEventRepository>();
+            container.Register<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
 
-            new DefaultConfigurator(container).Configure();
+            EventStoreConfigurator.Configure(container);
 
-
-            base.ExerciseEventStore(EventStore.Create(container));
+            using (container.Resolve<IDatabaseContextFactory>().Create(EventStoreConnectionStringName))
+            {
+                RecallFixture.ExerciseEventStore(EventStore.Create(container));
+            }
         }
     }
 }

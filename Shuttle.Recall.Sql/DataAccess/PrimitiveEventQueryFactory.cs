@@ -19,23 +19,23 @@ namespace Shuttle.Recall.Sql
 
         public IQuery RemoveSnapshot(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("RemoveSanpshot")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("PrimitiveEvent.RemoveSanpshot")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery RemoveEventStream(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("RemoveEventStream")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("PrimitiveEvent.RemoveEventStream")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery GetEventStream(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("GetEventStream")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("PrimitiveEvent.GetEventStream")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery GetProjectionEvents(long fromSequenceNumber, IEnumerable<Type> eventTypes, int limit)
         {
             return
-                new RawQuery(string.Format(_scriptProvider.Get("GetProjectionEvents"), limit,
+                new RawQuery(string.Format(_scriptProvider.Get("PrimitiveEvent.GetProjectionEvents"), limit,
                     eventTypes == null
                         ? string.Empty
                         : string.Format("and EventType in ({0})",

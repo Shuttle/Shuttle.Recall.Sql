@@ -4,7 +4,7 @@ using Shuttle.Core.Data;
 namespace Shuttle.Recall.Sql.Tests
 {
 	[TestFixture]
-	public class Fixture : Recall.Tests.EventStoreFixture
+	public class Fixture
 	{
 		[SetUp]
 		public void TestSetUp()
@@ -30,7 +30,6 @@ namespace Shuttle.Recall.Sql.Tests
 				DatabaseGateway.ExecuteUsing(RawQuery.Create("delete from EventStore"));
 				DatabaseGateway.ExecuteUsing(RawQuery.Create("delete from KeyStore"));
 				DatabaseGateway.ExecuteUsing(RawQuery.Create("delete from SnapshotStore"));
-				DatabaseGateway.ExecuteUsing(RawQuery.Create("delete from TypeStore"));
 			}
 
             using (DatabaseContextFactory.Create(EventStoreProjectionConnectionStringName))

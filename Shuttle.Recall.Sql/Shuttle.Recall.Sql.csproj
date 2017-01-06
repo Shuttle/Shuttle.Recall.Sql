@@ -61,12 +61,12 @@
       <HintPath>..\packages\Shuttle.Core.Data.4.2.6\lib\net40-full\Shuttle.Core.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Core.Infrastructure, Version=4.2.52.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Infrastructure.4.2.52\lib\net40-full\Shuttle.Core.Infrastructure.dll</HintPath>
+    <Reference Include="Shuttle.Core.Infrastructure, Version=4.2.54.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Infrastructure.4.2.54\lib\net40-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=4.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.4.0.6\lib\net40-full\Shuttle.Recall.dll</HintPath>
+    <Reference Include="Shuttle.Recall, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.4.0.15\lib\net40-full\Shuttle.Recall.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -108,8 +108,8 @@
   <ItemGroup>
     <EmbeddedResource Include=".scripts\System.Data.SqlClient\EventStoreCreate.sql" />
     <EmbeddedResource Include=".scripts\System.Data.SqlClient\ProjectionCreate.sql" />
-    <EmbeddedResource Include=".scripts\System.Data.SqlClient\RemoveEventStream.sql" />
-    <EmbeddedResource Include=".scripts\System.Data.SqlClient\RemoveSnapshot.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\PrimitiveEvent.RemoveEventStream.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\PrimitiveEvent.RemoveSnapshot.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SqlResources.resx">
@@ -121,10 +121,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include=".scripts\System.Data.SqlClient\GetEventStream.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\PrimitiveEvent.GetEventStream.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include=".scripts\System.Data.SqlClient\GetProjectionEvents.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\PrimitiveEvent.GetProjectionEvents.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\KeyStore.RemoveId.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\KeyStore.Contains.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\KeyStore.RemoveKey.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\KeyStore.Add.sql" />
+    <EmbeddedResource Include=".scripts\System.Data.SqlClient\KeyStore.Get.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
