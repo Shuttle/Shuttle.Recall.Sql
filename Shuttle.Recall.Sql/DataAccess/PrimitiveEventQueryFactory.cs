@@ -19,29 +19,47 @@ namespace Shuttle.Recall.Sql
 
         public IQuery RemoveSnapshot(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("PrimitiveEvent.RemoveSanpshot")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("EventStore.RemoveSanpshot")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery RemoveEventStream(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("PrimitiveEvent.RemoveEventStream")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("EventStore.RemoveEventStream")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery GetEventStream(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("PrimitiveEvent.GetEventStream")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("EventStore.GetEventStream")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery GetProjectionEvents(long fromSequenceNumber, IEnumerable<Type> eventTypes, int limit)
         {
             return
-                new RawQuery(string.Format(_scriptProvider.Get("PrimitiveEvent.GetProjectionEvents"), limit,
+                new RawQuery(string.Format(_scriptProvider.Get("EventStore.GetProjectionEvents"), limit,
                     eventTypes == null
                         ? string.Empty
                         : string.Format("and EventType in ({0})",
                             string.Join(",",
                                 eventTypes.Select(eventType => string.Concat("'", eventType, "'")).ToArray()))))
                     .AddParameterValue(EventStoreColumns.SequenceNumber, fromSequenceNumber);
+        }
+
+        public IQuery SaveEvent(PrimitiveEvent primitiveEvent)
+        {
+            return new RawQuery(_scriptProvider.Get("EventStore.Save"))
+                    .AddParameterValue(EventStoreColumns.Id, primitiveEvent.Id)
+                    .AddParameterValue(EventStoreColumns.DateRegistered, primitiveEvent.DateRegistered)
+                    .AddParameterValue(EventStoreColumns.EventEnvelope, primitiveEvent.EventEnvelope)
+                    .AddParameterValue(EventStoreColumns.EventType, primitiveEvent.EventType)
+                    .AddParameterValue(EventStoreColumns.Version, primitiveEvent.Version)
+                    .AddParameterValue(EventStoreColumns.IsSnapshot, primitiveEvent.IsSnapshot);
+        }
+
+        public IQuery SaveSnapshot(PrimitiveEvent primitiveEvent)
+        {
+            return new RawQuery(_scriptProvider.Get("SnapshotStore.Save"))
+                    .AddParameterValue(EventStoreColumns.Id, primitiveEvent.Id)
+                    .AddParameterValue(EventStoreColumns.Version, primitiveEvent.Version);
         }
     }
 }

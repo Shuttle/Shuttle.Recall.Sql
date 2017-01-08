@@ -27,18 +27,6 @@ else
 		[Version],
 		[EventType],
 		[EventEnvelope],
-		-1 SequenceNumber,
-		[DateRegistered]
-	from 
-		[dbo].[SnapshotStore] 
-	where 
-		Id = @Id
-	union
-	select
-		[Id],
-		[Version],
-		[EventType],
-		[EventEnvelope],
 		[SequenceNumber],
 		[DateRegistered]
 	from 
@@ -46,6 +34,6 @@ else
 	where 
 		Id = @Id
 	and
-		[Version] > @Version
+		[Version] >= @Version
 	order by
 		[Version]

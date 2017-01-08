@@ -10,5 +10,7 @@ namespace Shuttle.Recall.Sql
         IQuery RemoveEventStream(Guid id);
         IQuery GetEventStream(Guid id);
         IQuery GetProjectionEvents(long fromSequenceNumber, IEnumerable<Type> eventTypes, int limit);
+        IQuery SaveEvent(PrimitiveEvent primitiveEvent);
+        IQuery SaveSnapshot(PrimitiveEvent primitiveEvent);
     }
 }

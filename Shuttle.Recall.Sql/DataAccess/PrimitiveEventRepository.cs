@@ -40,12 +40,12 @@ namespace Shuttle.Recall.Sql
 
         public void Save(PrimitiveEvent primitiveEvent)
         {
-            throw new NotImplementedException();
-        }
+            _databaseGateway.ExecuteUsing(_queryFactory.SaveEvent(primitiveEvent));
 
-        public void SaveSnapshot(PrimitiveEvent primitiveEvent)
-        {
-            throw new NotImplementedException();
+            if (primitiveEvent.IsSnapshot)
+            {
+                _databaseGateway.ExecuteUsing(_queryFactory.SaveSnapshot(primitiveEvent));
+            }
         }
     }
 }

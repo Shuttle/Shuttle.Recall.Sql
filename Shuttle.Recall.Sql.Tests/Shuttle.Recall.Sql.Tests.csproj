@@ -55,12 +55,12 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.4.2.54\lib\net40-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.4.0.15\lib\net40-full\Shuttle.Recall.dll</HintPath>
+    <Reference Include="Shuttle.Recall, Version=4.0.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.4.0.26\lib\net40-full\Shuttle.Recall.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall.Tests, Version=1.7.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.Tests.1.7.10\lib\net40-full\Shuttle.Recall.Tests.dll</HintPath>
+    <Reference Include="Shuttle.Recall.Tests, Version=1.7.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.Tests.1.7.15\lib\net40-full\Shuttle.Recall.Tests.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
