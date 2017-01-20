@@ -19,7 +19,7 @@ namespace Shuttle.Recall.Sql
 
         public IQuery RemoveSnapshot(Guid id)
         {
-            return new RawQuery(_scriptProvider.Get("EventStore.RemoveSanpshot")).AddParameterValue(EventStoreColumns.Id, id);
+            return new RawQuery(_scriptProvider.Get("EventStore.RemoveSnapshot")).AddParameterValue(EventStoreColumns.Id, id);
         }
 
         public IQuery RemoveEventStream(Guid id)

@@ -65,8 +65,8 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.4.2.54\lib\net40-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=4.0.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.4.0.26\lib\net40-full\Shuttle.Recall.dll</HintPath>
+    <Reference Include="Shuttle.Recall, Version=4.0.38.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.4.0.38\lib\net40-full\Shuttle.Recall.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -84,7 +84,7 @@
     <Compile Include="Configuration\IProjectionConfiguration.cs" />
     <Compile Include="Configuration\ProjectionConfiguration.cs" />
     <Compile Include="Configuration\ProjectionSection.cs" />
-    <Compile Include="DataAccess\EventProjectionRepository.cs" />
+    <Compile Include="DataAccess\ProjectionRepository.cs" />
     <Compile Include="DataAccess\EventStoreColumns.cs" />
     <Compile Include="DataAccess\IKeyStoreQueryFactory.cs" />
     <Compile Include="DataAccess\IPrimitiveEventQueryFactory.cs" />
@@ -95,8 +95,8 @@
     <Compile Include="DataAccess\PrimitiveEventRepository.cs" />
     <Compile Include="DataAccess\ProjectionPositionColumns.cs" />
     <Compile Include="DataAccess\ProjectionQueryFactory.cs" />
-    <Compile Include="DatabaseContextModule.cs" />
-    <Compile Include="DatabaseContextObserver.cs" />
+    <Compile Include="EventProcessingModule.cs" />
+    <Compile Include="EventProcessingObserver.cs" />
     <Compile Include="KeyStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlResources.Designer.cs">
@@ -106,8 +106,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include=".scripts\System.Data.SqlClient\EventStoreCreate.sql" />
-    <EmbeddedResource Include=".scripts\System.Data.SqlClient\ProjectionCreate.sql" />
+    <None Include=".scripts\EventStoreCreate.sql" />
+    <None Include=".scripts\ProjectionCreate.sql" />
     <EmbeddedResource Include=".scripts\System.Data.SqlClient\EventStore.RemoveEventStream.sql" />
     <EmbeddedResource Include=".scripts\System.Data.SqlClient\EventStore.RemoveSnapshot.sql" />
   </ItemGroup>

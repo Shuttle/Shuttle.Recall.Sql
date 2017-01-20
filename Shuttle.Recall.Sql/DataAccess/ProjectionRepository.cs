@@ -3,12 +3,12 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Recall.Sql
 {
-    public class EventProjectionRepository : IEventProjectionRepository
+    public class ProjectionRepository : IProjectionRepository
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IProjectionQueryFactory _queryFactory;
 
-        public EventProjectionRepository(IDatabaseGateway databaseGateway, IProjectionQueryFactory queryFactory)
+        public ProjectionRepository(IDatabaseGateway databaseGateway, IProjectionQueryFactory queryFactory)
         {
             Guard.AgainstNull(databaseGateway, "databaseGateway");
             Guard.AgainstNull(queryFactory, "queryFactory");

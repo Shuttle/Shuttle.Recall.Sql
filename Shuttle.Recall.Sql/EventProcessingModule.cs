@@ -3,17 +3,17 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Recall.Sql
 {
-    public class DatabaseContextModule
+    public class EventProcessingModule
     {
-        private readonly DatabaseContextObserver _databaseContextObserver;
+        private readonly EventProcessingObserver _eventProcessingObserver;
         private readonly string _pipelineName = typeof(EventProcessingPipeline).FullName;
 
-        public DatabaseContextModule(IPipelineFactory pipelineFactory, DatabaseContextObserver databaseContextObserver)
+        public EventProcessingModule(IPipelineFactory pipelineFactory, EventProcessingObserver eventProcessingObserver)
         {
             Guard.AgainstNull(pipelineFactory, "pipelineFactory");
-            Guard.AgainstNull(databaseContextObserver, "databaseContextObserver");
+            Guard.AgainstNull(eventProcessingObserver, "EventProcessingObserver");
 
-            _databaseContextObserver = databaseContextObserver;
+            _eventProcessingObserver = eventProcessingObserver;
 
             pipelineFactory.PipelineCreated += PipelineCreated;
         }
@@ -25,7 +25,7 @@ namespace Shuttle.Recall.Sql
                 return;
             }
 
-            e.Pipeline.RegisterObserver(_databaseContextObserver);
+            e.Pipeline.RegisterObserver(_eventProcessingObserver);
         }
     }
 }

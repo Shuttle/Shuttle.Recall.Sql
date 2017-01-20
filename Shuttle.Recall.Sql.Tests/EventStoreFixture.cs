@@ -27,14 +27,21 @@ namespace Shuttle.Recall.Sql.Tests
             container.Register<IDbCommandFactory, DbCommandFactory>();
             container.Register<IDatabaseGateway, DatabaseGateway>();
             container.Register<IQueryMapper, QueryMapper>();
+            container.Register<IProjectionRepository, ProjectionRepository>();
+            container.Register<IProjectionQueryFactory, ProjectionQueryFactory>();
             container.Register<IPrimitiveEventRepository, PrimitiveEventRepository>();
             container.Register<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
 
+            container.Register<IProjectionConfiguration>(ProjectionSection.Configuration());
+            container.Register<EventProcessingModule, EventProcessingModule>();
+
             EventStoreConfigurator.Configure(container);
+
+            container.Resolve<EventProcessingModule>();
 
             using (container.Resolve<IDatabaseContextFactory>().Create(EventStoreConnectionStringName))
             {
-                RecallFixture.ExerciseEventStore(EventStore.Create(container));
+                RecallFixture.ExerciseEventStore(EventStore.Create(container), EventProcessor.Create(container));
             }
         }
     }
