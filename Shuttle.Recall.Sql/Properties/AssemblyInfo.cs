@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 #if NET40FULL
@@ -25,10 +25,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Shuttle.Recall.Sql for .NET Framework 4.6.1")]
 #endif
 
-[assembly: AssemblyVersion("4.0.1.0")]
+[assembly: AssemblyVersion("4.0.3.0")]
 [assembly: AssemblyCopyright("Copyright © Eben Roux 2017")]
 [assembly: AssemblyProduct("Shuttle.Recall")]
 [assembly: AssemblyCompany("Shuttle")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyInformationalVersion("4.0.1")]
+[assembly: AssemblyInformationalVersion("4.0.3")]
 [assembly: ComVisible(false)]

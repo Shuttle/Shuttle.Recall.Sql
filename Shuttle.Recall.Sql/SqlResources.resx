@@ -125,7 +125,7 @@
     <value>Could not find a section named '{0}' in configuration file '{1}' that is of type '{2}'.</value>
     <comment>{0} = section name, {1} = configuration file, {2} = the section type</comment>
   </data>
-  <data name="SqlClientResourceNameFormat" xml:space="preserve">
-    <value>Shuttle.Recall.Sql..scripts.System.Data.SqlClient.{0}.sql</value>
+  <data name="ResourceNameFormat" xml:space="preserve">
+    <value>Shuttle.Recall.Sql..scripts.{ProviderName}.{ScriptName}.sql</value>
   </data>
 </root>

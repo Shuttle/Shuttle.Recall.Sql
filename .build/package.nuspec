@@ -13,5 +13,13 @@
 		<releaseNotes/>
 		<copyright>Copyright (c) {year}, Eben Roux</copyright>
     <tags>shuttle shuttle-recall sql sql-server event-sourcing</tags>
+    <dependencies>
+      <dependency id="Shuttle.Recall" version="{Shuttle.Recall-version}" />
+      <dependency id="Shuttle.Core.Data" version="{Shuttle.Core.Data-version}" />
+    </dependencies>
   </metadata>
+  <files>
+    <file src="scripts\*.sql" target="scripts" />
+    <file src="lib\**\*.*" target="lib" />
+  </files>
 </package>

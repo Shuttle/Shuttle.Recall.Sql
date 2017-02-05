@@ -2,44 +2,57 @@
 
 A Sql Server implementation of the `Shuttle.Recall` event sourcing mechanism.
 
-### Event Sourcing
+### Event Sourcing / Processing
 
 ~~~ c#
-var databaseContextFactory = DatabaseContextFactory.Default();
-var eventStore = new EventStore(new DefaultSerializer(), new DatabaseGateway(), new EventStoreQueryFactory());
+// use any of the supported DI containers
+var container = new WindsorComponentContainer(new WindsorContainer());
 
-using (databaseContextFactory.Create("eventStringConnectionStringName"))
+container.Register<IScriptProvider>(new ScriptProvider(new ScriptProviderConfiguration
 {
-	var stream = eventStore.Get(sampleAggregateId);
+	ResourceAssembly = Assembly.GetAssembly(typeof(PrimitiveEventRepository)),
+	ResourceNameFormat = SqlResources.SqlClientResourceNameFormat
+}));
 
-	if (stream.IsEmpty)
-	{
-		return;
-	}
+container.Register<IDatabaseContextCache, ThreadStaticDatabaseContextCache>();
+container.Register<IDatabaseContextFactory, DatabaseContextFactory>();
+container.Register<IDbConnectionFactory, DbConnectionFactory>();
+container.Register<IDbCommandFactory, DbCommandFactory>();
+container.Register<IDatabaseGateway, DatabaseGateway>();
+container.Register<IQueryMapper, QueryMapper>();
+container.Register<IProjectionRepository, ProjectionRepository>();
+container.Register<IProjectionQueryFactory, ProjectionQueryFactory>();
+container.Register<IPrimitiveEventRepository, PrimitiveEventRepository>();
+container.Register<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
 
-	sampleAggregate = new SampleAggregate(sampleAggregateId;
-	stream.Apply(sampleAggregate);
+container.Register<IProjectionConfiguration>(ProjectionSection.Configuration());
+container.Register<EventProcessingModule, EventProcessingModule>();
 
-	stream.AddEvent(sampleAggregate.CommandReturningEvent("Some Data"));
+// register event handlers for event processing along with any other dependencies
+container.Register<MyHandler, MyHandler>();
+container.Register<IMyQueryFactory, MyQueryFactory>();
+container.Register<IMyQuery, MyQuery>();
 
-	eventStore.SaveEventStream(stream);
-}
+EventStoreConfigurator.Configure(container);
+
+container.Resolve<EventProcessingModule>(); // resolve the event processing module to create an instance
+
+var processor = EventProcessor.Create(container);
+
+var projection = new Projection("name");
+
+projection.AddEventHandler(container.Resolve<MyHandler>()); // add the handlers
+
+processor.AddProjection(projection);
+
+processor.Start();
+
+Application.Run(view);
+
+processor.Dispose();
 ~~~
 
-### Event Processing
-
-~~~ c#
-public ProjectionService(
-	ISerializer serializer, 
-	IProjectionConfiguration projectionConfiguration, 
-	IDatabaseContextFactory databaseContextFactory, 
-	IDatabaseGateway databaseGateway, 
-	IProjectionQueryFactory queryFactory)
-~~~
-
-You can use the `DefaultSerializer` implementation for the `ISerializer` from the [Shuttle.Core.Infrastructure](http://shuttle.github.io/shuttle-core/overview-serializer/) package as a starting point.
-
-The `IProjectionConfiguration` specifies the `ProviderName` and `ConnectionString` to use to connect to the database.  These can be configured using the `ProjectionSection` configuration section in the application configuration file:
+### Application Configuration File
 
 ~~~ xml
 <configuration>

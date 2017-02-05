@@ -7,14 +7,16 @@ namespace Shuttle.Recall.Sql.Tests
 	[TestFixture]
 	public class Fixture
 	{
+	    public IDatabaseContextCache DatabaseContextCache { get; private set; }
+
 		[SetUp]
 		public void TestSetUp()
 		{
 			DatabaseGateway = new DatabaseGateway();
-			DatabaseContextFactory = new DatabaseContextFactory(new DbConnectionFactory(), new DbCommandFactory(),
-				new ThreadStaticDatabaseContextCache());
+            DatabaseContextCache = new ThreadStaticDatabaseContextCache();
+            DatabaseContextFactory = new DatabaseContextFactory(new DbConnectionFactory(), new DbCommandFactory(), DatabaseContextCache);
 
-			EmptyDataStore();
+			ClearDataStore();
 		}
 
 		public DatabaseGateway DatabaseGateway { get; private set; }
@@ -24,7 +26,7 @@ namespace Shuttle.Recall.Sql.Tests
 		public string EventStoreProjectionConnectionStringName = "EventStoreProjection";
 
 		[TearDown]
-		protected void EmptyDataStore()
+		protected void ClearDataStore()
 		{
 			using (DatabaseContextFactory.Create(EventStoreConnectionStringName))
 			{

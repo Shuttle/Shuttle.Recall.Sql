@@ -15,8 +15,8 @@ namespace Shuttle.Recall.Sql.Tests
 			var store = new KeyStore(DatabaseGateway, new KeyStoreQueryFactory(new ScriptProvider(new ScriptProviderConfiguration
             {
                 ResourceAssembly = Assembly.GetAssembly(typeof(PrimitiveEventRepository)),
-                ResourceNameFormat = SqlResources.SqlClientResourceNameFormat
-            })));
+                ResourceNameFormat = SqlResources.ResourceNameFormat
+            }, DatabaseContextCache)));
 
 
 			using (DatabaseContextFactory.Create(EventStoreConnectionStringName))

@@ -18,8 +18,8 @@ namespace Shuttle.Recall.Sql.Tests
             container.Register<IScriptProvider>(new ScriptProvider(new ScriptProviderConfiguration
             {
                 ResourceAssembly = Assembly.GetAssembly(typeof (PrimitiveEventRepository)),
-                ResourceNameFormat = SqlResources.SqlClientResourceNameFormat
-            }));
+                ResourceNameFormat = SqlResources.ResourceNameFormat
+            }, DatabaseContextCache));
 
             container.Register<IDatabaseContextCache, ThreadStaticDatabaseContextCache>();
             container.Register<IDatabaseContextFactory, DatabaseContextFactory>();

@@ -79,11 +79,11 @@ namespace Shuttle.Recall.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shuttle.Recall.Sql..scripts.System.Data.SqlClient.{0}.sql.
+        ///   Looks up a localized string similar to Shuttle.Recall.Sql..scripts.{ProviderName}.{ScriptName}.sql.
         /// </summary>
-        public static string SqlClientResourceNameFormat {
+        public static string ResourceNameFormat {
             get {
-                return ResourceManager.GetString("SqlClientResourceNameFormat", resourceCulture);
+                return ResourceManager.GetString("ResourceNameFormat", resourceCulture);
             }
         }
     }
