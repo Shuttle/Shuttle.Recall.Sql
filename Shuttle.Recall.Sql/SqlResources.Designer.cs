@@ -77,14 +77,5 @@ namespace Shuttle.Recall.Sql {
                 return ResourceManager.GetString("OpenSectionException", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shuttle.Recall.Sql..scripts.{ProviderName}.{ScriptName}.sql.
-        /// </summary>
-        public static string ResourceNameFormat {
-            get {
-                return ResourceManager.GetString("ResourceNameFormat", resourceCulture);
-            }
-        }
     }
 }
