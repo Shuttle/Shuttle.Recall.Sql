@@ -63,7 +63,7 @@ namespace Shuttle.Recall.Sql {
         /// <summary>
         ///   Looks up a localized string similar to Could not find a connection string item with name &apos;{0}&apos;..
         /// </summary>
-        public static string ConnectionStringEntryMissing {
+        public static string ConnectionStringMissing {
             get {
                 return ResourceManager.GetString("ConnectionStringEntryMissing", resourceCulture);
             }

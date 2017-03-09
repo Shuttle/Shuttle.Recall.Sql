@@ -29,10 +29,8 @@ namespace Shuttle.Recall.Sql.Tests
             container.Register<IPrimitiveEventRepository, PrimitiveEventRepository>();
             container.Register<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
 
-            container.Register<IProjectionConfiguration>(ProjectionSection.Configuration());
-            container.Register<EventProcessingModule, EventProcessingModule>();
-
-            EventStoreConfigurator.Configure(container);
+	        EventProcessingModule.RegisterComponents(container);
+			EventStore.RegisterComponents(container);
 
             container.Resolve<EventProcessingModule>();
 

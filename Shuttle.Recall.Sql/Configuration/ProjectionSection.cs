@@ -58,7 +58,7 @@ namespace Shuttle.Recall.Sql
 
             if (result == null)
             {
-                throw new InvalidOperationException(string.Format(SqlResources.ConnectionStringEntryMissing, connectionStringName));
+                throw new InvalidOperationException(string.Format(SqlResources.ConnectionStringMissing, connectionStringName));
             }
 
 	        return result;
