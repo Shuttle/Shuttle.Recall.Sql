@@ -29,10 +29,7 @@ namespace Shuttle.Recall.Sql.Tests
             container.Register<IPrimitiveEventRepository, PrimitiveEventRepository>();
             container.Register<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
 
-	        EventProcessingModule.RegisterComponents(container);
-			EventStore.RegisterComponents(container);
-
-            container.Resolve<EventProcessingModule>();
+	        EventStore.Register(container);
 
             using (container.Resolve<IDatabaseContextFactory>().Create(EventStoreConnectionStringName))
             {

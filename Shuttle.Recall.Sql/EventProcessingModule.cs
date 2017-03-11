@@ -27,27 +27,5 @@ namespace Shuttle.Recall.Sql
 
 			e.Pipeline.RegisterObserver(_eventProcessingObserver);
 		}
-
-		public static IComponentRegistry Register(IComponentRegistry registry)
-		{
-			Guard.AgainstNull(registry, "registry");
-
-			if (!registry.IsRegistered<IProjectionConfiguration>())
-			{
-				registry.Register<IProjectionConfiguration>(ProjectionSection.Configuration());
-			}
-
-			if (!registry.IsRegistered<EventProcessingObserver>())
-			{
-				registry.Register<EventProcessingObserver>();
-			}
-
-			if (!registry.IsRegistered<EventProcessingModule>())
-			{
-				registry.Register<EventProcessingModule>();
-			}
-
-			return registry;
-		}
 	}
 }
