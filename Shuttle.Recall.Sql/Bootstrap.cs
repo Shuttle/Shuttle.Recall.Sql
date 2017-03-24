@@ -1,8 +1,9 @@
-﻿using Shuttle.Core.Infrastructure;
+﻿using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Recall.Sql
 {
-	public class Bootstrap : 
+	public class Bootstrap :
 		IComponentRegistryBootstrap,
 		IComponentResolverBootstrap
 	{
@@ -10,20 +11,26 @@ namespace Shuttle.Recall.Sql
 		{
 			Guard.AgainstNull(registry, "registry");
 
-			if (!registry.IsRegistered<IProjectionConfiguration>())
-			{
-				registry.Register<IProjectionConfiguration>(ProjectionSection.Configuration());
-			}
+			registry.AttemptRegister<IProjectionConfiguration>(ProjectionSection.Configuration());
 
-			if (!registry.IsRegistered<EventProcessingObserver>())
-			{
-				registry.Register<EventProcessingObserver>();
-			}
+			registry.AttemptRegister<IScriptProviderConfiguration, ScriptProviderConfiguration>();
+			registry.AttemptRegister<IScriptProvider, ScriptProvider>();
 
-			if (!registry.IsRegistered<EventProcessingModule>())
-			{
-				registry.Register<EventProcessingModule>();
-			}
+			registry.AttemptRegister<IDatabaseContextCache, ThreadStaticDatabaseContextCache>();
+			registry.AttemptRegister<IDatabaseContextFactory, DatabaseContextFactory>();
+			registry.AttemptRegister<IDbConnectionFactory, DbConnectionFactory>();
+			registry.AttemptRegister<IDbCommandFactory, DbCommandFactory>();
+			registry.AttemptRegister<IDatabaseGateway, DatabaseGateway>();
+			registry.AttemptRegister<IQueryMapper, QueryMapper>();
+			registry.AttemptRegister<IProjectionRepository, ProjectionRepository>();
+			registry.AttemptRegister<IProjectionQueryFactory, ProjectionQueryFactory>();
+			registry.AttemptRegister<IPrimitiveEventRepository, PrimitiveEventRepository>();
+			registry.AttemptRegister<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
+			registry.AttemptRegister<IKeyStoreQueryFactory, KeyStoreQueryFactory>();
+			registry.AttemptRegister<IKeyStore, KeyStore>();
+
+			registry.AttemptRegister<EventProcessingObserver, EventProcessingObserver>();
+			registry.AttemptRegister<EventProcessingModule, EventProcessingModule>();
 		}
 
 		public void Resolve(IComponentResolver resolver)
