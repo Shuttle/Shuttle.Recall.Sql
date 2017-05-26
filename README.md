@@ -14,41 +14,19 @@ container.Register<IScriptProvider>(new ScriptProvider(new ScriptProviderConfigu
 	ResourceNameFormat = SqlResources.SqlClientResourceNameFormat
 }));
 
-container.Register<IDatabaseContextCache, ThreadStaticDatabaseContextCache>();
-container.Register<IDatabaseContextFactory, DatabaseContextFactory>();
-container.Register<IDbConnectionFactory, DbConnectionFactory>();
-container.Register<IDbCommandFactory, DbCommandFactory>();
-container.Register<IDatabaseGateway, DatabaseGateway>();
-container.Register<IQueryMapper, QueryMapper>();
-container.Register<IProjectionRepository, ProjectionRepository>();
-container.Register<IProjectionQueryFactory, ProjectionQueryFactory>();
-container.Register<IPrimitiveEventRepository, PrimitiveEventRepository>();
-container.Register<IPrimitiveEventQueryFactory, PrimitiveEventQueryFactory>();
-
-container.Register<IProjectionConfiguration>(ProjectionSection.Configuration());
-container.Register<EventProcessingModule, EventProcessingModule>();
-
-// register event handlers for event processing along with any other dependencies
+// register event/projection handlers for event processing along with any other dependencies
 container.Register<MyHandler, MyHandler>();
 container.Register<IMyQueryFactory, MyQueryFactory>();
 container.Register<IMyQuery, MyQuery>();
 
-EventStoreConfigurator.Configure(container);
-
-container.Resolve<EventProcessingModule>(); // resolve the event processing module to create an instance
-
 var processor = EventProcessor.Create(container);
 
-var projection = new Projection("name");
-
-projection.AddEventHandler(container.Resolve<MyHandler>()); // add the handlers
-
-processor.AddProjection(projection);
+// create and add all your projections
+\_eventProcessor.AddProjection(new Projection("MyProjection").AddEventHandler(container.Resolve<MyHandlerHandler>()));
 
 processor.Start();
 
-Application.Run(view);
-
+// dispose when done
 processor.Dispose();
 ~~~
 
