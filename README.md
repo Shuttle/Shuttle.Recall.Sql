@@ -1,5 +1,9 @@
 # Shuttle.Recall.Sql
 
+***OBSOLETE***
+
+Please use [Shuttle.Recall.Sql.Storage](https://github.com/Shuttle/Shuttle.Recall.Sql.Storage) for storage SQL-based storage implementations and [Shuttle.Recall.Sql.EventProcessing](https://github.com/Shuttle/Shuttle.Recall.Sql.EventProcessing) for projections.
+
 A Sql Server implementation of the `Shuttle.Recall` event sourcing mechanism.
 
 ### Event Sourcing / Processing
