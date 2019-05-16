@@ -63,6 +63,6 @@ processor.Dispose();
 
 Use can then call `ProjectionSection.Configuration()` to return the configuration set up according to the application configuration files `ProjectionSection`.
 
-The `IDatabaseContextFactory` and `IDatabaseGateway` implementation follow the structures as defined in the [Shuttle.Core.Data](http://shuttle.github.io/shuttle-core/overview-data/) package.
+The `IDatabaseContextFactory` and `IDatabaseGateway` implementation follow the structures as defined in the [Shuttle.Core.Data](http://shuttle.github.io/shuttle-core/shuttle-core-data) package.
 
 For the `IProjectionQueryFactory` you can simply specify `new ProjectionQueryFactory()`.
